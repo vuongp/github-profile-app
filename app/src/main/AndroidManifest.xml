@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubProfile">
         <activity
-            android:name=".MainActivity"
+            android:name=".screen.profile.ProfileActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
