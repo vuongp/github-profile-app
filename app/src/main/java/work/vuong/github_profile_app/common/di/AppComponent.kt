@@ -11,6 +11,4 @@ import work.vuong.github_profile_app.App
     AndroidSupportInjectionModule::class,
     ActivityInjectionModule::class
 ])
-interface AppComponent: AndroidInjector<App> {
-
-}
+interface AppComponent: AndroidInjector<App>
