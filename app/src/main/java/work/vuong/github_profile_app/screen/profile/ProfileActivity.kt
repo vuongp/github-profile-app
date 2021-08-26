@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.android.AndroidInjection
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import work.vuong.github_profile_app.R
@@ -28,6 +29,7 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
