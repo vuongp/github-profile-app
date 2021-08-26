@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "GithubProfile"
 include ':app'
+include ':view-components'

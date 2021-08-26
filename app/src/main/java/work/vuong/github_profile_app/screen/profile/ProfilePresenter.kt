@@ -7,7 +7,11 @@ import moxy.MvpPresenter
 class ProfilePresenter : MvpPresenter<ProfileView>() {
 
     override fun onFirstViewAttach() {
+        viewState.showProfile()
+    }
 
+    fun onRefresh() {
+        viewState.setRefreshing(false)
     }
 
 }

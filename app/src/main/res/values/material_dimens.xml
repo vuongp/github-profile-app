@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_point_1">8dp</dimen>
+    <dimen name="material_point_2">16dp</dimen>
+    <dimen name="material_point_3">24dp</dimen>
+    <dimen name="material_point_4">32dp</dimen>
+</resources>
