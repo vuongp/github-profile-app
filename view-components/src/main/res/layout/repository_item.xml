@@ -24,14 +24,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:ellipsize="end"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/image"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="@id/image"
+        style="@style/Body"
         tools:text="Sian Taylor" />
 
     <TextView
@@ -39,14 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/sourcesanspro_semi_bold"
-        android:letterSpacing="0.03"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image"
+        style="@style/Body.Bold"
         tools:text="telegraph-android" />
 
     <TextView
@@ -54,14 +48,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repository_name"
+        style="@style/Body"
         tools:text="Telegraph X is Android client" />
 
     <TextView
@@ -70,14 +61,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:drawablePadding="4dp"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:drawableStartCompat="@drawable/repository_star"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repository_description"
+        style="@style/Body"
         tools:text="10" />
 
 
@@ -88,14 +76,11 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:drawablePadding="4dp"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:drawableStartCompat="@drawable/repository_language_oval"
         app:layout_constraintStart_toEndOf="@id/star_count"
         app:layout_constraintTop_toBottomOf="@id/repository_description"
+        style="@style/Body"
         tools:text="kotlin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

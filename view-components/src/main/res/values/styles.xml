@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="H1">
+        <item name="android:fontFamily">@font/sourcesanspro_bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="H2">
+        <item name="android:fontFamily">@font/sourcesanspro_bold</item>
+        <item name="android:letterSpacing">0.07</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Body">
+        <item name="android:fontFamily">@font/sourcesanspro_regular</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Body.Bold">
+        <item name="android:fontFamily">@font/sourcesanspro_semi_bold</item>
+    </style>
+
+</resources>

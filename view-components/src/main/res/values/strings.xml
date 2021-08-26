@@ -2,4 +2,5 @@
 <resources>
     <string name="followers">followers</string>
     <string name="following">following</string>
+    <string name="category_title_button">View all</string>
 </resources>

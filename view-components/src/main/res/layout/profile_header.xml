@@ -19,29 +19,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/sourcesanspro_bold"
-        android:letterSpacing="0.08"
-        android:textColor="@color/black"
-        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@id/login_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
+        style="@style/H1"
         tools:text="Sian Taylor" />
 
     <TextView
         android:id="@+id/login_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/full_name"
         app:layout_constraintTop_toBottomOf="@id/full_name"
+        style="@style/Body"
         tools:text="setaylor" />
 
     <TextView
@@ -49,12 +43,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/sourcesanspro_semi_bold"
-        android:letterSpacing="0.03"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image"
+        style="@style/Body.Bold"
         tools:text="s.e.taylor@gmail.com" />
 
     <TextView
@@ -62,12 +53,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/sourcesanspro_semi_bold"
-        android:letterSpacing="0.03"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email"
+        style="@style/Body.Bold"
         tools:text="48" />
 
     <TextView
@@ -75,12 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:text="@string/followers"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/followers_count"
+        style="@style/Body"
         app:layout_constraintTop_toTopOf="@id/followers_count" />
 
     <TextView
@@ -88,12 +73,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/sourcesanspro_semi_bold"
-        android:letterSpacing="0.03"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/followers"
         app:layout_constraintTop_toTopOf="@id/followers"
+        style="@style/Body.Bold"
         tools:text="72" />
 
     <TextView
@@ -101,12 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:fontFamily="@font/sourcesanspro_regular"
-        android:letterSpacing="0.03"
         android:text="@string/following"
-        android:textColor="@color/black"
-        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/following_count"
+        style="@style/Body"
         app:layout_constraintTop_toTopOf="@id/followers_count" />
 
 
