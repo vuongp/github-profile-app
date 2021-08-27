@@ -26,4 +26,8 @@
         <item name="android:fontFamily">@font/sourcesanspro_semi_bold</item>
     </style>
 
+    <style name="RoundImageView">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

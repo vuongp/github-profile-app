@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import work.vuong.view_components.R
 import work.vuong.view_components.common.diffutil.EqualsDiffUtil
+import work.vuong.view_components.common.imageloader.ImageLoader
 import work.vuong.view_components.databinding.ProfileHeaderBinding
 
 class ProfileHeaderAdapter :
@@ -30,6 +31,7 @@ class ProfileHeaderAdapter :
         }
         holder.binding.followersCount.text = item.followersCount.toString()
         holder.binding.followingCount.text = item.followingCount.toString()
+        item.profileImageLoader?.load(holder.binding.image)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -44,6 +46,8 @@ class ProfileHeaderAdapter :
         val email: String?,
         val followersCount: Int,
         val followingCount: Int
-    )
+    ){
+        var profileImageLoader: ImageLoader? = null
+    }
 
 }

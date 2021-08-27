@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import githubapi.GetUserQuery
 import work.vuong.github_profile_app.R
 import work.vuong.github_profile_app.common.adapterbinder.AdapterBinder
+import work.vuong.github_profile_app.common.network.CoilImageLoader
 import work.vuong.view_components.common.decoration.LastItemDecoration
 import work.vuong.view_components.common.decoration.MarginByTypeDecoration
 import work.vuong.view_components.common.decoration.SizeDecoration
@@ -38,7 +39,9 @@ class ProfileAdapterBinder @Inject constructor(
                         item.email,
                         item.followers.totalCount,
                         item.following.totalCount,
-                    )
+                    ).apply {
+                        profileImageLoader = CoilImageLoader(item.avatarUrl.toString())
+                    }
                 )
             )
         })
@@ -62,7 +65,9 @@ class ProfileAdapterBinder @Inject constructor(
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
                     it.primaryLanguage?.color.orEmpty(),
-                )
+                ).apply {
+                    repositoryImageLoader = CoilImageLoader(it.owner.avatarUrl.toString())
+                }
             }
         }
 
@@ -104,7 +109,9 @@ class ProfileAdapterBinder @Inject constructor(
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
                     it.primaryLanguage?.color.orEmpty(),
-                )
+                ).apply {
+                    repositoryImageLoader = CoilImageLoader(it.owner.avatarUrl.toString())
+                }
             }
         }.orEmpty()
         adapter.addAdapter(HorizontalRepositoryListAdapter(horizontalRepositoryListDecorations).apply {
@@ -130,7 +137,9 @@ class ProfileAdapterBinder @Inject constructor(
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
                     it.primaryLanguage?.color.orEmpty(),
-                )
+                ).apply {
+                    repositoryImageLoader = CoilImageLoader(it.owner.avatarUrl.toString())
+                }
             }
         }.orEmpty()
 

@@ -3,12 +3,14 @@ package work.vuong.view_components.profile
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import work.vuong.view_components.R
 import work.vuong.view_components.common.diffutil.EqualsDiffUtil
+import work.vuong.view_components.common.imageloader.ImageLoader
 import work.vuong.view_components.databinding.RepositoryItemBinding
 
 class RepositoryItemAdapter :
@@ -28,7 +30,15 @@ class RepositoryItemAdapter :
             repositoryDescription.text = item.repositoryDescription
             starCount.text = item.starCount.toString()
             primaryLanguage.text = item.primaryLanguage
-            TextViewCompat.setCompoundDrawableTintList(primaryLanguage, ColorStateList.valueOf(Color.parseColor(item.primaryLanguageColor)))
+            primaryLanguage.visibility = if (item.primaryLanguage.isNullOrBlank()) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+            if (item.primaryLanguageColor?.isNotBlank() == true) {
+                TextViewCompat.setCompoundDrawableTintList(primaryLanguage, ColorStateList.valueOf(Color.parseColor(item.primaryLanguageColor)))
+            }
+            item.repositoryImageLoader?.load(image)
         }
     }
 
@@ -43,8 +53,10 @@ class RepositoryItemAdapter :
         val repositoryName: String,
         val repositoryDescription: String,
         val starCount: Int,
-        val primaryLanguage: String,
-        val primaryLanguageColor: String
-    )
+        val primaryLanguage: String?,
+        val primaryLanguageColor: String?
+    ) {
+        var repositoryImageLoader: ImageLoader? = null
+    }
 
 }
