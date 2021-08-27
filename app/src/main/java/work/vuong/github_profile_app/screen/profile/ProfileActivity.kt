@@ -60,15 +60,11 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
         itemDecorations.provide(resources).forEach {
             binding.recyclerView.addItemDecoration(it)
         }
+        adapterBinder.bind(adapter)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun showProfile(user: GetUserQuery.User) {
-        adapter.adapters.forEach {
-            adapter.removeAdapter(it)
-        }
-        adapterBinder.bind(adapter, user)
-        adapter.notifyDataSetChanged()
+        adapterBinder.update(adapter, user)
     }
 
     override fun setRefreshing(isRefreshing: Boolean) {

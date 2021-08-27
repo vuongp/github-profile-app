@@ -8,9 +8,15 @@ import work.vuong.view_components.R
 import work.vuong.view_components.common.diffutil.EqualsDiffUtil
 import work.vuong.view_components.databinding.TopBarTitleBinding
 
-class TopBarTitleAdapter : ListAdapter<TopBarTitleAdapter.ViewItem, TopBarTitleAdapter.ViewHolder>(
+class TopBarTitleAdapter(
+    vararg val viewItem: ViewItem
+) : ListAdapter<TopBarTitleAdapter.ViewItem, TopBarTitleAdapter.ViewHolder>(
     EqualsDiffUtil<ViewItem>()
 ) {
+
+    init {
+        submitList(viewItem.toList())
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

@@ -9,6 +9,7 @@ import work.vuong.github_profile_app.common.network.CoilImageLoader
 import work.vuong.view_components.common.decoration.LastItemDecoration
 import work.vuong.view_components.common.decoration.MarginByTypeDecoration
 import work.vuong.view_components.common.decoration.SizeDecoration
+import work.vuong.view_components.common.helper.submitItem
 import work.vuong.view_components.profile.CategoryTitleAdapter
 import work.vuong.view_components.profile.HorizontalRepositoryListAdapter
 import work.vuong.view_components.profile.ProfileHeaderAdapter
@@ -17,7 +18,7 @@ import work.vuong.view_components.profile.TopBarTitleAdapter
 import javax.inject.Inject
 
 class ProfileAdapterBinder @Inject constructor(
-    resources: Resources
+    private val resources: Resources
 ): AdapterBinder<ConcatAdapter, GetUserQuery.User> {
 
     private val materialPoint2 = resources.getDimensionPixelSize(R.dimen.material_point_2)
@@ -35,7 +36,7 @@ class ProfileAdapterBinder @Inject constructor(
         )
     )
 
-    private val topBarTitleAdapter = TopBarTitleAdapter()
+    private val topBarTitleAdapter = TopBarTitleAdapter(TopBarTitleAdapter.ViewItem(resources.getString(R.string.profile_title)))
     private val profileHeaderAdapter = ProfileHeaderAdapter()
     private val pinnedCategoryTitleAdapter = CategoryTitleAdapter()
     private val pinnedRepositoryItemAdapter = RepositoryItemAdapter()
@@ -44,50 +45,65 @@ class ProfileAdapterBinder @Inject constructor(
     private val starredCategoryTitleAdapter = CategoryTitleAdapter()
     private val starredRepositoryListAdapter = HorizontalRepositoryListAdapter(horizontalRepositoryListDecorations)
 
-    init {
-        topBarTitleAdapter.submitList(listOf(TopBarTitleAdapter.ViewItem(resources.getString(R.string.profile_title))))
-        pinnedCategoryTitleAdapter.submitList(listOf(CategoryTitleAdapter.ViewItem(resources.getString(R.string.pinned_repositories_title))))
-        topCategoryTitleAdapter.submitList(listOf(CategoryTitleAdapter.ViewItem(resources.getString(R.string.top_repositories_title))))
-        starredCategoryTitleAdapter.submitList(listOf(CategoryTitleAdapter.ViewItem(resources.getString(R.string.starred_repositories_title))))
+    override fun bind(adapter: ConcatAdapter) {
+        adapter.adapters.forEach {
+            adapter.removeAdapter(it)
+        }
+        adapter.addAdapter(topBarTitleAdapter)
+        adapter.addAdapter(profileHeaderAdapter)
+        adapter.addAdapter(pinnedCategoryTitleAdapter)
+        adapter.addAdapter(pinnedRepositoryItemAdapter)
+        adapter.addAdapter(topCategoryTitleAdapter)
+        adapter.addAdapter(topRepositoryListAdapter)
+        adapter.addAdapter(starredCategoryTitleAdapter)
+        adapter.addAdapter(starredRepositoryListAdapter)
     }
 
-    override fun bind(adapter: ConcatAdapter, item: GetUserQuery.User) {
-        adapter.addAdapter(topBarTitleAdapter)
-
+    override fun update(adapter: ConcatAdapter, item: GetUserQuery.User) {
         profileHeaderAdapter.submitList(listOf(createProfileHeaderViewItem(item)))
-        adapter.addAdapter(profileHeaderAdapter)
 
         val pinnedRepositories = item.pinnedItems.nodes?.mapNotNull { node ->
             node?.asRepository?.let { createRepositoryViewItem(it) }
         }.orEmpty()
+        if (pinnedRepositories.isEmpty()) {
+            pinnedCategoryTitleAdapter.submitList(emptyList())
+        } else {
+            pinnedCategoryTitleAdapter.submitItem(
+                CategoryTitleAdapter.ViewItem(
+                    resources.getString(R.string.pinned_repositories_title)
+                )
+            )
+        }
         pinnedRepositoryItemAdapter.submitList(pinnedRepositories)
 
-        if (pinnedRepositories.isNotEmpty()) {
-            adapter.addAdapter(pinnedCategoryTitleAdapter)
-            adapter.addAdapter(pinnedRepositoryItemAdapter)
-        }
 
         val topRepos = item.topRepositories.nodes?.mapNotNull { node ->
             node?.let { createRepositoryViewItem(it) }
         }.orEmpty()
-        topRepositoryListAdapter.submitList(listOf(HorizontalRepositoryListAdapter.ViewItem(topRepos)))
-
-        if (topRepos.isNotEmpty()) {
-            adapter.addAdapter(topCategoryTitleAdapter)
-            adapter.addAdapter(topRepositoryListAdapter)
+        if (topRepos.isEmpty()) {
+            topCategoryTitleAdapter.submitList(emptyList())
+        } else {
+            topCategoryTitleAdapter.submitItem(
+                CategoryTitleAdapter.ViewItem(
+                    resources.getString(R.string.top_repositories_title)
+                )
+            )
         }
+        topRepositoryListAdapter.submitItem(HorizontalRepositoryListAdapter.ViewItem(topRepos))
 
         val starredRepos = item.starredRepositories.nodes?.mapNotNull { node ->
             node?.let { createRepositoryViewItem(it) }
         }.orEmpty()
-        starredRepositoryListAdapter.submitList(listOf(
-            HorizontalRepositoryListAdapter.ViewItem(starredRepos)
-        ))
-
-        if (starredRepos.isNotEmpty()) {
-            adapter.addAdapter(starredCategoryTitleAdapter)
-            adapter.addAdapter(starredRepositoryListAdapter)
+        if (starredRepos.isEmpty()) {
+            starredCategoryTitleAdapter.submitList(emptyList())
+        } else {
+            starredCategoryTitleAdapter.submitItem(
+                CategoryTitleAdapter.ViewItem(
+                    resources.getString(R.string.starred_repositories_title)
+                )
+            )
         }
+        starredRepositoryListAdapter.submitItem(HorizontalRepositoryListAdapter.ViewItem(starredRepos))
     }
 
     private fun createProfileHeaderViewItem(item: GetUserQuery.User): ProfileHeaderAdapter.ViewItem {

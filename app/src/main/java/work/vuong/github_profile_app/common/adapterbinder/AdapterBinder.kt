@@ -7,5 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
  *  therefore filling adapters with the needed data to display view within a recyclerview
  */
 interface AdapterBinder<A : RecyclerView.Adapter<*>, T> {
-    fun bind(adapter: A, item: T)
+    fun bind(adapter: A)
+    fun update(adapter: A, item: T)
 }

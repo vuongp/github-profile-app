@@ -10,7 +10,8 @@ class CoilImageLoader(val url: String): ImageLoader {
     override fun load(imageView: ImageView) {
         imageView.load(url) {
             crossfade(true)
-            this.placeholder(R.drawable.image_placeholder)
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
         }
     }
 
