@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GithubProfile</string>
+    <string name="profile_title">Profile</string>
+    <string name="pinned_repositories_title">Pinned</string>
+    <string name="top_repositories_title">Top repositories</string>
+    <string name="starred_repositories_title">Starred repositories</string>
 </resources>
