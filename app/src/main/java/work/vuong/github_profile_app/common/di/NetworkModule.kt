@@ -9,9 +9,12 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import work.vuong.github_profile_app.BuildConfig
+import work.vuong.github_profile_app.common.network.ApolloGithubApiService
 import work.vuong.github_profile_app.common.network.AuthorizationHeaderInterceptor
+import work.vuong.github_profile_app.common.network.GitHubApiService
 import java.io.File
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -41,6 +44,12 @@ class NetworkModule {
                     .build()
             )
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provides(apolloGithubApiService: ApolloGithubApiService): GitHubApiService {
+        return apolloGithubApiService
     }
 
 }
