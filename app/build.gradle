@@ -2,7 +2,11 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.apollographql.apollo'
 }
+
+def configProperties = new Properties()
+configProperties.load(new FileInputStream(rootProject.file('config.properties')))
 
 android {
     compileSdk 31
@@ -19,6 +23,9 @@ android {
         versionName "0.1 beta"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "GITHUB_API_TOKEN", configProperties["GITHUB_API_TOKEN"]
+        buildConfigField "String", "PROFILE", configProperties["PROFILE"]
     }
 
     buildTypes {
@@ -36,6 +43,11 @@ android {
     }
 }
 
+apollo {
+    // instruct the compiler to generate Kotlin models
+    generateKotlinModels.set(true)
+}
+
 dependencies {
     implementation project(':view-components')
 
@@ -46,6 +58,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
     // Moxy
     implementation "com.github.moxy-community:moxy:2.2.2"
@@ -58,6 +71,11 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.35.1'
     implementation 'com.google.dagger:dagger-android-support:2.35.1'
     kapt 'com.google.dagger:dagger-android-processor:2.35.1'
+
+    // Apollo
+    implementation("com.apollographql.apollo:apollo-runtime:2.5.9")
+    implementation("com.apollographql.apollo:apollo-coroutines-support:2.5.9")
+    implementation("com.apollographql.apollo:apollo-http-cache:2.5.9")
 
     //noinspection GradleDynamicVersion
     testImplementation 'junit:junit:4.+'

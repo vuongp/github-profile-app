@@ -9,6 +9,8 @@ import work.vuong.github_profile_app.App
 @Component(modules = [
     AndroidInjectionModule::class,
     AndroidSupportInjectionModule::class,
-    ActivityInjectionModule::class
+    ActivityInjectionModule::class,
+    NetworkModule::class,
+    ApplicationModule::class
 ])
 interface AppComponent: AndroidInjector<App>

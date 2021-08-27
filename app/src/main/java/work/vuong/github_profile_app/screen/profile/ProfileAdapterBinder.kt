@@ -2,6 +2,7 @@ package work.vuong.github_profile_app.screen.profile
 
 import android.content.res.Resources
 import androidx.recyclerview.widget.ConcatAdapter
+import githubapi.GetUserQuery
 import work.vuong.github_profile_app.R
 import work.vuong.github_profile_app.common.adapterbinder.AdapterBinder
 import work.vuong.view_components.common.decoration.LastItemDecoration
@@ -16,9 +17,9 @@ import javax.inject.Inject
 
 class ProfileAdapterBinder @Inject constructor(
     private val resources: Resources
-): AdapterBinder<ConcatAdapter, Any> {
+): AdapterBinder<ConcatAdapter, GetUserQuery.User> {
 
-    override fun bind(adapter: ConcatAdapter, item: Any) {
+    override fun bind(adapter: ConcatAdapter, item: GetUserQuery.User) {
         adapter.addAdapter(TopBarTitleAdapter().apply {
             submitList(
                 listOf(
@@ -31,11 +32,11 @@ class ProfileAdapterBinder @Inject constructor(
             submitList(
                 listOf(
                     ProfileHeaderAdapter.ViewItem(
-                        "Sian Taylor",
-                        "setaylor",
-                        "s.e.taylor@gmail.com",
-                        48,
-                        72,
+                        item.name.orEmpty(),
+                        item.login,
+                        item.email,
+                        item.followers.totalCount,
+                        item.following.totalCount,
                     )
                 )
             )
@@ -51,19 +52,20 @@ class ProfileAdapterBinder @Inject constructor(
             )
         })
 
-        val repositoryItem = RepositoryItemAdapter.ViewItem(
-            "setaylor",
-            "telegraph-android",
-            "Telegraph X is Android client",
-            75,
-            "Kotlin"
-        )
+        val pinnedRepositories = item.pinnedItems.nodes?.mapNotNull { node ->
+            node?.asRepository?.let {
+                RepositoryItemAdapter.ViewItem(
+                    it.owner.login,
+                    it.name,
+                    it.description.orEmpty(),
+                    it.stargazerCount,
+                    it.primaryLanguage?.name.orEmpty(),
+                )
+            }
+        }
+
         adapter.addAdapter(RepositoryItemAdapter().apply {
-            submitList(
-                (0..3).map {
-                    repositoryItem
-                }
-            )
+            submitList(pinnedRepositories)
         })
 
         adapter.addAdapter(CategoryTitleAdapter().apply {
@@ -90,16 +92,20 @@ class ProfileAdapterBinder @Inject constructor(
                 width = smallRepositoryWidth
             )
         )
-        adapter.addAdapter(HorizontalRepositoryListAdapter(horizontalRepositoryListDecorations).apply {
-            submitList(
-                listOf(
-                    HorizontalRepositoryListAdapter.ViewItem(
-                        (0..10).map {
-                            repositoryItem
-                        }
-                    )
+
+        val topRepos = item.topRepositories.nodes?.mapNotNull { node ->
+            node?.let {
+                RepositoryItemAdapter.ViewItem(
+                    it.owner.login,
+                    it.name,
+                    it.description.orEmpty(),
+                    it.stargazerCount,
+                    it.primaryLanguage?.name.orEmpty(),
                 )
-            )
+            }
+        }.orEmpty()
+        adapter.addAdapter(HorizontalRepositoryListAdapter(horizontalRepositoryListDecorations).apply {
+            submitList(listOf(HorizontalRepositoryListAdapter.ViewItem(topRepos)))
         })
 
         adapter.addAdapter(CategoryTitleAdapter().apply {
@@ -112,14 +118,22 @@ class ProfileAdapterBinder @Inject constructor(
             )
         })
 
+        val starredRepos = item.starredRepositories.nodes?.mapNotNull { node ->
+            node?.let {
+                RepositoryItemAdapter.ViewItem(
+                    it.owner.login,
+                    it.name,
+                    it.description.orEmpty(),
+                    it.stargazerCount,
+                    it.primaryLanguage?.name.orEmpty(),
+                )
+            }
+        }.orEmpty()
+
         adapter.addAdapter(HorizontalRepositoryListAdapter(horizontalRepositoryListDecorations).apply {
             submitList(
                 listOf(
-                    HorizontalRepositoryListAdapter.ViewItem(
-                        (0..10).map {
-                            repositoryItem
-                        }
-                    )
+                    HorizontalRepositoryListAdapter.ViewItem(starredRepos)
                 )
             )
         })

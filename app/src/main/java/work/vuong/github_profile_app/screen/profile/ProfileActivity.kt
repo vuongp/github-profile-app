@@ -5,12 +5,14 @@ import android.os.Bundle
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
+import githubapi.GetUserQuery
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import work.vuong.github_profile_app.common.adapterbinder.AdapterBinder
 import work.vuong.github_profile_app.common.decoration.DecorationProvider
 import work.vuong.github_profile_app.databinding.ActivityProfileBinding
 import javax.inject.Inject
+import javax.inject.Provider
 
 class ProfileActivity : MvpAppCompatActivity(), ProfileView {
 
@@ -18,11 +20,14 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     lateinit var itemDecorations: DecorationProvider
 
     @Inject
-    lateinit var adapterBinder: AdapterBinder<ConcatAdapter, Any>
+    lateinit var presenterProvider: Provider<ProfilePresenter>
+
+    @Inject
+    lateinit var adapterBinder: AdapterBinder<ConcatAdapter, GetUserQuery.User>
 
     private lateinit var binding: ActivityProfileBinding
 
-    private val presenter by moxyPresenter { ProfilePresenter() }
+    private val presenter by moxyPresenter { presenterProvider.get() }
 
     private val adapter by lazy {
         ConcatAdapter(
@@ -58,11 +63,11 @@ class ProfileActivity : MvpAppCompatActivity(), ProfileView {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun showProfile() {
+    override fun showProfile(user: GetUserQuery.User) {
         adapter.adapters.forEach {
             adapter.removeAdapter(it)
         }
-        adapterBinder.bind(adapter, Any())
+        adapterBinder.bind(adapter, user)
         adapter.notifyDataSetChanged()
     }
 
