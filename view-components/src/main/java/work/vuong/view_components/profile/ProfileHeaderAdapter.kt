@@ -1,6 +1,7 @@
 package work.vuong.view_components.profile
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,11 @@ class ProfileHeaderAdapter :
         holder.binding.fullName.text = item.fullName
         holder.binding.loginName.text = item.loginName
         holder.binding.email.text = item.email
+        holder.binding.email.visibility = if (item.email.isNullOrEmpty()) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
         holder.binding.followersCount.text = item.followersCount.toString()
         holder.binding.followingCount.text = item.followingCount.toString()
     }
@@ -35,7 +41,7 @@ class ProfileHeaderAdapter :
     data class ViewItem(
         val fullName: String,
         val loginName: String,
-        val email: String,
+        val email: String?,
         val followersCount: Int,
         val followingCount: Int
     )

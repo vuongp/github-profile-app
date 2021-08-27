@@ -1,7 +1,10 @@
 package work.vuong.view_components.profile
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import work.vuong.view_components.R
@@ -25,6 +28,7 @@ class RepositoryItemAdapter :
             repositoryDescription.text = item.repositoryDescription
             starCount.text = item.starCount.toString()
             primaryLanguage.text = item.primaryLanguage
+            TextViewCompat.setCompoundDrawableTintList(primaryLanguage, ColorStateList.valueOf(Color.parseColor(item.primaryLanguageColor)))
         }
     }
 
@@ -39,7 +43,8 @@ class RepositoryItemAdapter :
         val repositoryName: String,
         val repositoryDescription: String,
         val starCount: Int,
-        val primaryLanguage: String
+        val primaryLanguage: String,
+        val primaryLanguageColor: String
     )
 
 }

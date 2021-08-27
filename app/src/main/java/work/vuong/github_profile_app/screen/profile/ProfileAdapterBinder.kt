@@ -20,6 +20,7 @@ class ProfileAdapterBinder @Inject constructor(
 ): AdapterBinder<ConcatAdapter, GetUserQuery.User> {
 
     override fun bind(adapter: ConcatAdapter, item: GetUserQuery.User) {
+        // TODO: 27/08/2021 refactor
         adapter.addAdapter(TopBarTitleAdapter().apply {
             submitList(
                 listOf(
@@ -60,6 +61,7 @@ class ProfileAdapterBinder @Inject constructor(
                     it.description.orEmpty(),
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
+                    it.primaryLanguage?.color.orEmpty(),
                 )
             }
         }
@@ -101,6 +103,7 @@ class ProfileAdapterBinder @Inject constructor(
                     it.description.orEmpty(),
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
+                    it.primaryLanguage?.color.orEmpty(),
                 )
             }
         }.orEmpty()
@@ -126,6 +129,7 @@ class ProfileAdapterBinder @Inject constructor(
                     it.description.orEmpty(),
                     it.stargazerCount,
                     it.primaryLanguage?.name.orEmpty(),
+                    it.primaryLanguage?.color.orEmpty(),
                 )
             }
         }.orEmpty()
