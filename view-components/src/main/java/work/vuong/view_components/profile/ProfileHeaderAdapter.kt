@@ -38,7 +38,7 @@ class ProfileHeaderAdapter :
         return R.layout.profile_header
     }
 
-    inner class ViewHolder(val binding: ProfileHeaderBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ProfileHeaderBinding) : RecyclerView.ViewHolder(binding.root)
 
     data class ViewItem(
         val fullName: String,

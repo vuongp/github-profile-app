@@ -26,7 +26,7 @@ class TopBarTitleAdapter : ListAdapter<TopBarTitleAdapter.ViewItem, TopBarTitleA
         return R.layout.top_bar_title
     }
 
-    inner class ViewHolder(val binding: TopBarTitleBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: TopBarTitleBinding): RecyclerView.ViewHolder(binding.root)
 
     data class ViewItem(val title: String)
 

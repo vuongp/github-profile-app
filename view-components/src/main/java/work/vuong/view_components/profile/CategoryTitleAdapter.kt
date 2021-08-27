@@ -26,7 +26,7 @@ class CategoryTitleAdapter : ListAdapter<CategoryTitleAdapter.ViewItem, Category
         return R.layout.category_title
     }
 
-    inner class ViewHolder(val binding: CategoryTitleBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: CategoryTitleBinding): RecyclerView.ViewHolder(binding.root)
 
     data class ViewItem(val title: String)
 

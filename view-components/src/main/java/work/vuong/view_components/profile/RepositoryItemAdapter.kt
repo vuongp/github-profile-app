@@ -46,7 +46,7 @@ class RepositoryItemAdapter :
         return R.layout.repository_item
     }
 
-    inner class ViewHolder(val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     data class ViewItem(
         val loginName: String,
