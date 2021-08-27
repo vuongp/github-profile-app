@@ -2,7 +2,7 @@
 An Android app fetching and displaying a single Github profile. The app uses the Github GraphQl API.
 
 # Setup
-When checking out project you'll need to add your own github api token. Generate one [here](https://github.com/settings/tokens/new). Copy `config.properties.example` to `config.properties` and add your key into `GITHUB_API_TOKEN`
+When checking out the project you'll need to add your own github api token. Generate one [here](https://github.com/settings/tokens/new). Copy `config.properties.example` to `config.properties` and add your key into `GITHUB_API_TOKEN`
 
 # Warning
 Currently error handling is not implemented. This means that whenever an error occurs you'll probably get a white screen.
